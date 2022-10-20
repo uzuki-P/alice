@@ -8,7 +8,7 @@ import 'package:alice/model/alice_http_call.dart';
 import 'package:alice/utils/alice_parser.dart';
 import 'package:flutter/material.dart';
 // import 'package:open_file/open_file.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+// import 'package:package_info_plus/package_info_plus.dart';
 // import 'package:path_provider/path_provider.dart';
 
 class AliceSaveHelper {
@@ -117,12 +117,12 @@ class AliceSaveHelper {
 
   static Future<String> _buildAliceLog() async {
     final StringBuffer stringBuffer = StringBuffer();
-    final packageInfo = await PackageInfo.fromPlatform();
+    // final packageInfo = await PackageInfo.fromPlatform();
     stringBuffer.write("Alice - HTTP Inspector\n");
-    stringBuffer.write("App name:  ${packageInfo.appName}\n");
-    stringBuffer.write("Package: ${packageInfo.packageName}\n");
-    stringBuffer.write("Version: ${packageInfo.version}\n");
-    stringBuffer.write("Build number: ${packageInfo.buildNumber}\n");
+    // stringBuffer.write("App name:  ${packageInfo.appName}\n");
+    // stringBuffer.write("Package: ${packageInfo.packageName}\n");
+    // stringBuffer.write("Version: ${packageInfo.version}\n");
+    // stringBuffer.write("Build number: ${packageInfo.buildNumber}\n");
     stringBuffer.write("Generated: ${DateTime.now().toIso8601String()}\n");
     stringBuffer.write("\n");
     return stringBuffer.toString();

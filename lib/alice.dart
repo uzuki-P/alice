@@ -1,9 +1,8 @@
 import 'dart:io';
-import 'package:alice/core/alice_chopper_response_interceptor.dart';
 import 'package:alice/core/alice_http_adapter.dart';
 import 'package:alice/model/alice_http_call.dart';
 
-import 'package:chopper/chopper.dart';
+// import 'package:chopper/chopper.dart';
 import 'package:http/http.dart' as http;
 import 'package:alice/core/alice_core.dart';
 import 'package:alice/core/alice_dio_interceptor.dart';
@@ -109,9 +108,9 @@ class Alice {
   }
 
   /// Get chopper interceptor. This should be added to Chopper instance.
-  List<ResponseInterceptor> getChopperInterceptor() {
-    return [AliceChopperInterceptor(_aliceCore)];
-  }
+  // List<ResponseInterceptor> getChopperInterceptor() {
+  //   return [AliceChopperInterceptor(_aliceCore)];
+  // }
 
   /// Handle generic http call. Can be used to any http client.
   void addHttpCall(AliceHttpCall aliceHttpCall) {
