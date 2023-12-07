@@ -14,17 +14,17 @@ dependencies:
 
 #  chopper: ^4.0.1
   collection: ^1.17.1
-  dio: ^5.2.1+1
-  flutter_local_notifications: ^14.1.1
-  http: ^1.0.0
+  dio: ^5.4.0
+  flutter_local_notifications: ^16.2.0
+  http: ^0.13.6
 #  package_info_plus: ^2.0.0
-  path_provider: ^2.0.15
+  path_provider: ^2.1.1
 #  permission_handler: ^10.1.0
   rxdart: ^0.27.7
-  sensors_plus: ^3.0.2
+  sensors_plus: ^4.0.1
   share: ^2.0.4
 #  better_player: ^0.0.83
 #  open_file: ^3.2.1
 
 dev_dependencies:
-  lint: ^2.1.2
+  lint: ^2.2.0
