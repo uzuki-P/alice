@@ -42,6 +42,7 @@ class _AliceCallsListScreenState extends State<AliceCallsListScreen> {
           widget._aliceCore.directionality ?? Directionality.of(context),
       child: Theme(
         data: ThemeData(
+          useMaterial3: false,
           brightness: widget._aliceCore.brightness,
           colorScheme: ColorScheme.light(secondary: AliceConstants.lightRed),
         ),

@@ -54,6 +54,7 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: MaterialStateProperty.all<Color>(_buttonColor));
     return MaterialApp(
       theme: ThemeData(
+        useMaterial3: false,
         primaryColor: _primaryColor,
         colorScheme: ColorScheme.light(secondary: _accentColor),
       ),
