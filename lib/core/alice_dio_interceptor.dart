@@ -20,7 +20,7 @@ class AliceDioInterceptor extends InterceptorsWrapper {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     if (aliceCore.callsSubject.value
-        .any((item) => item.hashCode == options.hashCode)) {
+        .any((item) => item.id == options.hashCode)) {
       handler.next(options);
       return;
     }
