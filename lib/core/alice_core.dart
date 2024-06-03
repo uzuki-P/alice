@@ -8,7 +8,7 @@ import 'package:alice/ui/page/alice_calls_list_screen.dart';
 import 'package:alice/utils/shake_detector.dart';
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AliceCore {
@@ -40,15 +40,15 @@ class AliceCore {
   ///Flag used to show/hide share button
   final bool? showShareButton;
 
-  late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
+  // late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
   GlobalKey<NavigatorState>? navigatorKey;
   Brightness _brightness = Brightness.light;
   bool _isInspectorOpened = false;
   ShakeDetector? _shakeDetector;
   StreamSubscription? _callsSubscription;
-  String? _notificationMessage;
-  String? _notificationMessageShown;
-  bool _notificationProcessing = false;
+  // String? _notificationMessage;
+  // String? _notificationMessageShown;
+  // bool _notificationProcessing = false;
 
   /// Creates alice core instance
   AliceCore(
@@ -61,10 +61,10 @@ class AliceCore {
     this.directionality,
     this.showShareButton,
   }) {
-    if (showNotification) {
-      _initializeNotificationsPlugin();
-      _callsSubscription = callsSubject.listen((_) => _onCallsChanged());
-    }
+    // if (showNotification) {
+    //   // _initializeNotificationsPlugin();
+    //   _callsSubscription = callsSubject.listen((_) => _onCallsChanged());
+    // }
     if (showInspectorOnShake) {
       _shakeDetector = ShakeDetector.autoStart(
         onPhoneShake: () {
@@ -86,43 +86,43 @@ class AliceCore {
   /// Get currently used brightness
   Brightness get brightness => _brightness;
 
-  void _initializeNotificationsPlugin() {
-    _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    final initializationSettingsAndroid =
-        AndroidInitializationSettings(notificationIcon);
-    final initializationSettingsIOS = DarwinInitializationSettings();
-    final initializationSettings = InitializationSettings(
-      android: initializationSettingsAndroid,
-      iOS: initializationSettingsIOS,
-    );
-    _flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
-      onDidReceiveNotificationResponse: _onSelectedNotification,
-      onDidReceiveBackgroundNotificationResponse: callOnBackground,
-    );
-  }
+  // void _initializeNotificationsPlugin() {
+  //   _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  //   final initializationSettingsAndroid =
+  //       AndroidInitializationSettings(notificationIcon);
+  //   final initializationSettingsIOS = DarwinInitializationSettings();
+  //   final initializationSettings = InitializationSettings(
+  //     android: initializationSettingsAndroid,
+  //     iOS: initializationSettingsIOS,
+  //   );
+  //   _flutterLocalNotificationsPlugin.initialize(
+  //     initializationSettings,
+  //     onDidReceiveNotificationResponse: _onSelectedNotification,
+  //     onDidReceiveBackgroundNotificationResponse: callOnBackground,
+  //   );
+  // }
 
-  void _onCallsChanged() async {
-    if (callsSubject.value.isNotEmpty) {
-      _notificationMessage = _getNotificationMessage();
-      if (_notificationMessage != _notificationMessageShown &&
-          !_notificationProcessing) {
-        await _showLocalNotification();
-        _onCallsChanged();
-      }
-    }
-  }
+  // void _onCallsChanged() async {
+  //   if (callsSubject.value.isNotEmpty) {
+  //     _notificationMessage = _getNotificationMessage();
+  //     if (_notificationMessage != _notificationMessageShown &&
+  //         !_notificationProcessing) {
+  //       // await _showLocalNotification();
+  //       _onCallsChanged();
+  //     }
+  //   }
+  // }
 
-  Future<void> _onSelectedNotification(NotificationResponse? payload) async {
-    assert(payload != null, "payload can't be null");
-    navigateToCallListScreen();
-    return;
-  }
+  // Future<void> _onSelectedNotification(NotificationResponse? payload) async {
+  //   assert(payload != null, "payload can't be null");
+  //   navigateToCallListScreen();
+  //   return;
+  // }
 
-  @pragma('vm:entry-point')
-  static Future<void> callOnBackground(NotificationResponse details) async {
-    print(details);
-  }
+  // @pragma('vm:entry-point')
+  // static Future<void> callOnBackground(NotificationResponse details) async {
+  //   print(details);
+  // }
 
   /// Opens Http calls inspector. This will navigate user to the new fullscreen
   /// page where all listened http calls can be viewed.
@@ -148,98 +148,98 @@ class AliceCore {
   /// Get context from navigator key. Used to open inspector route.
   BuildContext? getContext() => navigatorKey?.currentState?.overlay?.context;
 
-  String _getNotificationMessage() {
-    final List<AliceHttpCall> calls = callsSubject.value;
-    final int successCalls = calls
-        .where(
-          (call) =>
-              call.response != null &&
-              call.response!.status! >= 200 &&
-              call.response!.status! < 300,
-        )
-        .toList()
-        .length;
+  // String _getNotificationMessage() {
+  //   final List<AliceHttpCall> calls = callsSubject.value;
+  //   final int successCalls = calls
+  //       .where(
+  //         (call) =>
+  //             call.response != null &&
+  //             call.response!.status! >= 200 &&
+  //             call.response!.status! < 300,
+  //       )
+  //       .toList()
+  //       .length;
+  //
+  //   final int redirectCalls = calls
+  //       .where(
+  //         (call) =>
+  //             call.response != null &&
+  //             call.response!.status! >= 300 &&
+  //             call.response!.status! < 400,
+  //       )
+  //       .toList()
+  //       .length;
+  //
+  //   final int errorCalls = calls
+  //       .where(
+  //         (call) =>
+  //             call.response != null &&
+  //             call.response!.status! >= 400 &&
+  //             call.response!.status! < 600,
+  //       )
+  //       .toList()
+  //       .length;
+  //
+  //   final int loadingCalls =
+  //       calls.where((call) => call.loading).toList().length;
+  //
+  //   final StringBuffer notificationsMessage = StringBuffer();
+  //   if (loadingCalls > 0) {
+  //     notificationsMessage.write("Loading: $loadingCalls");
+  //     notificationsMessage.write(" | ");
+  //   }
+  //   if (successCalls > 0) {
+  //     notificationsMessage.write("Success: $successCalls");
+  //     notificationsMessage.write(" | ");
+  //   }
+  //   if (redirectCalls > 0) {
+  //     notificationsMessage.write("Redirect: $redirectCalls");
+  //     notificationsMessage.write(" | ");
+  //   }
+  //   if (errorCalls > 0) {
+  //     notificationsMessage.write("Error: $errorCalls");
+  //   }
+  //   String notificationMessageString = notificationsMessage.toString();
+  //   if (notificationMessageString.endsWith(" | ")) {
+  //     notificationMessageString = notificationMessageString.substring(
+  //       0,
+  //       notificationMessageString.length - 3,
+  //     );
+  //   }
+  //
+  //   return notificationMessageString;
+  // }
 
-    final int redirectCalls = calls
-        .where(
-          (call) =>
-              call.response != null &&
-              call.response!.status! >= 300 &&
-              call.response!.status! < 400,
-        )
-        .toList()
-        .length;
-
-    final int errorCalls = calls
-        .where(
-          (call) =>
-              call.response != null &&
-              call.response!.status! >= 400 &&
-              call.response!.status! < 600,
-        )
-        .toList()
-        .length;
-
-    final int loadingCalls =
-        calls.where((call) => call.loading).toList().length;
-
-    final StringBuffer notificationsMessage = StringBuffer();
-    if (loadingCalls > 0) {
-      notificationsMessage.write("Loading: $loadingCalls");
-      notificationsMessage.write(" | ");
-    }
-    if (successCalls > 0) {
-      notificationsMessage.write("Success: $successCalls");
-      notificationsMessage.write(" | ");
-    }
-    if (redirectCalls > 0) {
-      notificationsMessage.write("Redirect: $redirectCalls");
-      notificationsMessage.write(" | ");
-    }
-    if (errorCalls > 0) {
-      notificationsMessage.write("Error: $errorCalls");
-    }
-    String notificationMessageString = notificationsMessage.toString();
-    if (notificationMessageString.endsWith(" | ")) {
-      notificationMessageString = notificationMessageString.substring(
-        0,
-        notificationMessageString.length - 3,
-      );
-    }
-
-    return notificationMessageString;
-  }
-
-  Future _showLocalNotification() async {
-    _notificationProcessing = true;
-    const channelId = "Alice";
-    const channelName = "Alice";
-    const channelDescription = "Alice";
-    final androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      channelId,
-      channelName,
-      channelDescription: channelDescription,
-      enableVibration: false,
-      playSound: false,
-      largeIcon: DrawableResourceAndroidBitmap(notificationIcon),
-    );
-    const iOSPlatformChannelSpecifics = DarwinNotificationDetails();
-    final platformChannelSpecifics = NotificationDetails(
-      android: androidPlatformChannelSpecifics,
-      iOS: iOSPlatformChannelSpecifics,
-    );
-    final String? message = _notificationMessage;
-    await _flutterLocalNotificationsPlugin.show(
-      0,
-      "Alice (total: ${callsSubject.value.length} requests)",
-      message,
-      platformChannelSpecifics,
-      payload: "",
-    );
-    _notificationMessageShown = message;
-    _notificationProcessing = false;
-    return;
-  }
+  // Future _showLocalNotification() async {
+  //   _notificationProcessing = true;
+  //   const channelId = "Alice";
+  //   const channelName = "Alice";
+  //   const channelDescription = "Alice";
+  //   final androidPlatformChannelSpecifics = AndroidNotificationDetails(
+  //     channelId,
+  //     channelName,
+  //     channelDescription: channelDescription,
+  //     enableVibration: false,
+  //     playSound: false,
+  //     largeIcon: DrawableResourceAndroidBitmap(notificationIcon),
+  //   );
+  //   const iOSPlatformChannelSpecifics = DarwinNotificationDetails();
+  //   final platformChannelSpecifics = NotificationDetails(
+  //     android: androidPlatformChannelSpecifics,
+  //     iOS: iOSPlatformChannelSpecifics,
+  //   );
+  //   final String? message = _notificationMessage;
+  //   await _flutterLocalNotificationsPlugin.show(
+  //     0,
+  //     "Alice (total: ${callsSubject.value.length} requests)",
+  //     message,
+  //     platformChannelSpecifics,
+  //     payload: "",
+  //   );
+  //   _notificationMessageShown = message;
+  //   _notificationProcessing = false;
+  //   return;
+  // }
 
   /// Add alice http call to calls subject
   void addCall(AliceHttpCall call) {
