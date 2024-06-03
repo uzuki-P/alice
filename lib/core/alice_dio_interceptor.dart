@@ -19,6 +19,12 @@ class AliceDioInterceptor extends InterceptorsWrapper {
   /// Handles dio request and creates alice http call based on it
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    if (aliceCore.callsSubject.value
+        .any((item) => item.hashCode == options.hashCode)) {
+      handler.next(options);
+      return;
+    }
+
     final AliceHttpCall call = AliceHttpCall(options.hashCode);
 
     final Uri uri = options.uri;
