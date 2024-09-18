@@ -9,7 +9,7 @@ environment:
   sdk: ^3.0.0
 
 dependencies:
-  alice: ^1.0.0-dev.9
+  alice: ../alice
   test: ^1.25.2
   mocktail: ^1.0.4
 

@@ -96,7 +96,7 @@ class _AliceCallsListPageState extends State<AliceCallsListPage>
                 )
               : Text(
                   context.i18n(
-                    AliceTranslationKey.alice,
+                  AliceTranslationKey.alice,
                   ),
                 ),
           actions: isLoggerTab
@@ -256,18 +256,19 @@ class _AliceCallsListPageState extends State<AliceCallsListPage>
   /// Called when save to file has been pressed. It saves data to file.
   void _saveToFile() async {
     final result = await aliceCore.saveCallsToFile(context);
-    if (result.success) {
+    final path = result.path;
+    if (result.success && path != null) {
       AliceGeneralDialog.show(
         context: context,
         title: context.i18n(AliceTranslationKey.saveSuccessTitle),
         description: context
             .i18n(AliceTranslationKey.saveSuccessDescription)
-            .replaceAll("[path]", result.path!),
+            .replaceAll("[path]", path),
         secondButtonTitle: OperatingSystem.isAndroid
             ? context.i18n(AliceTranslationKey.saveSuccessView)
             : null,
         secondButtonAction: () =>
-            OperatingSystem.isAndroid ? OpenFilex.open(result.path) : null,
+            OperatingSystem.isAndroid ? OpenFilex.open(path) : null,
       );
     } else {
       final [String title, String description] = switch (result.error) {
