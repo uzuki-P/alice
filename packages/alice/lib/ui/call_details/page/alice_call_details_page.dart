@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:alice/core/alice_core.dart';
-import 'package:alice/helper/alice_export_helper.dart';
 import 'package:alice/model/alice_http_call.dart';
 import 'package:alice/model/alice_translation.dart';
 import 'package:alice/ui/call_details/model/alice_call_details_tab.dart';
@@ -74,18 +73,18 @@ class _AliceCallDetailsPageState extends State<AliceCallDetailsPage>
                       AliceCallErrorScreen(call: widget.call),
                     ],
                   ),
-                  floatingActionButton:
-                      widget.core.configuration.showShareButton
-                          ? FloatingActionButton(
-                              backgroundColor: AliceTheme.lightRed,
-                              key: const Key('share_key'),
-                              onPressed: _shareCall,
-                              child: const Icon(
-                                Icons.share,
-                                color: AliceTheme.white,
-                              ),
-                            )
-                          : null,
+                  // floatingActionButton:
+                  //     widget.core.configuration.showShareButton
+                  //         ? FloatingActionButton(
+                  //             backgroundColor: AliceTheme.lightRed,
+                  //             key: const Key('share_key'),
+                  //             onPressed: _shareCall,
+                  //             child: const Icon(
+                  //               Icons.share,
+                  //               color: AliceTheme.white,
+                  //             ),
+                  //           )
+                  //         : null,
                 ),
               );
             }
@@ -105,9 +104,9 @@ class _AliceCallDetailsPageState extends State<AliceCallDetailsPage>
 
   /// Called when share button has been pressed. It encodes the [widget.call]
   /// and tries to invoke system action to share it.
-  void _shareCall() async {
-    await AliceExportHelper.shareCall(context: context, call: widget.call);
-  }
+  // void _shareCall() async {
+  //   await AliceExportHelper.shareCall(context: context, call: widget.call);
+  // }
 
   /// Get tab name based on [item] type.
   String _getTabName({required AliceCallDetailsTabItem item}) {
